@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>OBjis Formation - identification</title>
+</head>
+
+	<body>
+
+		<!-- Déclaration du template dont la page est cliente  -->
+		<ui:composition template="/template/layout.xhtml">
+		
+			<!-- Redéfinition de la zone "content" du layout -->
+			<ui:define name="content">
+				<f:view>
+<!-- 					<h:form id="loginForm"> -->
+<!-- 						<h2>IDENTIFICATION</h2> -->
+<!-- 						<h:panelGrid columns="2"> -->
+						
+<!-- 							<h:outputLabel for="login"> -->
+<!-- 								<h:outputText value="Login :" /> -->
+<!-- 							</h:outputLabel> -->
+<!-- 							<h:inputText id="login" value="#{logonBean.login}" /> -->
+							
+<!-- 							<h:outputLabel for="password"> -->
+<!-- 								<h:outputText value="Mot de passe :" /> -->
+<!-- 							</h:outputLabel> -->
+<!-- 							<h:inputSecret id="password" value="#{logonBean.password}" /> -->
+							
+<!-- 							<h:commandButton class="formbutton2" id="submitButton" type="SUBMIT" value="Valider !" action="#{logonBean.logon}" /> -->
+<!-- 							<h:commandButton class="formbutton2" id="resetButton" type="RESET" value="Effacer !" /> -->
+							
+<!-- 							value="#{logonBean.login}" -> on récuperera cette donnée pour la définir en tant qu'attributs login du bean managé logonBean  -->
+							
+<!-- 						</h:panelGrid> -->
+<!-- 					</h:form> -->
+
+		<h:form>
+			<center>
+			<p:panel header="Formulaire JSF d'inscription au Club Objis." >
+			
+			<table>	
+				<tr>
+					<td>Prénom:</td>
+					<td><h:inputText value="#{userbean.prenom}" required="true" id="prenom" />
+					<h:message for="prenom" /></td>
+				</tr>
+				<tr>
+					<td>Nom:</td>
+					<td><h:inputText value="#{userbean.nom}" required="true" id="nom" />
+					<h:message for="nom" /></td>
+				</tr>
+				<tr>
+					<td>Sexe:</td>
+					<td><p:selectOneRadio value="#{userbean.genre}" required="true" id="genre">
+							<f:selectItem itemLabel="Homme" itemValue="homme" />
+							<f:selectItem itemLabel="Femme" itemValue="femme" />
+						</p:selectOneRadio> <h:message for="genre" /></td>
+				</tr>
+				<tr>
+					<td>Date de naissance:</td>
+					<td><h:inputText value="#{userbean.datedenaissance}" id="datenaissance" required="true">
+							<f:convertDateTime pattern="d-M-yyyy" />
+						</h:inputText> (mm-dd-yy) <h:message for="datenaissance" /></td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td><h:inputText value="#{userbean.email}" required="true" id="email" />
+					<h:message for="email" /></td>
+				</tr>
+				<tr>
+					<td>Qualité de service:</td>
+					<td><p:selectOneMenu value="#{userbean.niveaudeservice}">
+							<f:selectItem itemLabel="Basic" itemValue="basic" />
+							<f:selectItem itemLabel="Medium" itemValue="medium" />
+							<f:selectItem itemLabel="Premium" itemValue="premium" />
+						</p:selectOneMenu></td>
+				</tr>
+			</table>
+			<p>
+				<p:commandButton value="Inscription" action="#{userbean.addAction()}" />
+			</p>
+			</p:panel>
+			</center>
+		</h:form>
+				</f:view>
+				
+				<h:form>
+			<h4>Listes des participants inscrits</h4>
+					
+			<p:dataTable value="#{userbean.userList}" var="o"
+				styleClass="order-table" headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row">
+				
+				<p:column>
+					<!-- column header -->
+					<f:facet name="header">Prénom</f:facet>
+					<!-- row record -->
+					<h:outputText value="#{o.prenom}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Nom</f:facet>
+					<h:outputText value="#{o.nom}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{o.email}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Date de Naissance</f:facet>
+					<h:outputText value="#{o.datedenaissance}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Niveau de Service</f:facet>
+					<h:outputText value="#{o.niveaudeservice}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Supprimer</f:facet>
+					<h:commandLink value="Supprimer !" action="#{userbean.deleteAction(o)}">
+					</h:commandLink>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Modifier</f:facet>
+					<h:commandLink value="Modifier !" action="#{userbean.modifyAction(o)}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		
+			</ui:define>
+			
+		</ui:composition>
+
+	</body>
+
+
+</html>
